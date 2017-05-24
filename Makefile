@@ -3,6 +3,7 @@ COMMIT?=latest
 IMAGE_VERSION?=latest
 DOCKERFILE_DIR?=build
 DOGEN_VERSION?=2.0.0rc12
+REPO?=$(shell cat $(IMAGE_FILE) | grep "^name:" | cut -d' ' -f2)
 
 all:
 	sh build.sh
