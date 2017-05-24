@@ -1,0 +1,22 @@
+#!/bin/sh
+
+set -e
+
+SCRIPT_DIR=$(dirname $0)
+ADDED_DIR=${SCRIPT_DIR}/added
+
+mkdir --parents /opt/mqtt-gateway
+# unpack
+{
+    cd /tmp/artifacts
+    tar xzf "$DISTRO_NAME.tar.gz"
+    mv mqtt-gateway.jar /opt/mqtt-gateway
+}
+
+mv $ADDED_DIR/run_mqtt.sh /opt/mqtt-gateway/
+chmod +x /opt/mqtt-gateway/run_mqtt.sh
+
+#need to create home dir for community images
+mkdir -p /home/jboss
+chown 185 /home/jboss
+chmod -R a+rwX /home/jboss
