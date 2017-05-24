@@ -8,6 +8,7 @@ then
 fi
 
 echo "CURRENT DIR: $PWD"
+ls -latr $PWD
 docker pull ppatierno/qdrouterd:0.8.0-repo || fail=1
 container=`docker run -d --name qdrouterd -p 5672:5672 -p 55673:55673 -v $PWD/src/test/resources:/conf ppatierno/qdrouterd:0.8.0-repo qdrouterd --conf /conf/qdrouterd.conf || fail=1`
 echo "CONTAINER: $container"
