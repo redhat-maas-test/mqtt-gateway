@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# Add jboss user to root group
+usermod -g root -G 185 185
+
+mkdir -p /usr/local/dynamic-resources
+cp -p /tmp/scripts/dynamic-resources/dynamic_resources.sh /usr/local/dynamic-resources/
+chown -R 185:root /usr/local/dynamic-resources/
+chmod -R g+rwX $dir /usr/local/dynamic-resources/
