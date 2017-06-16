@@ -1,6 +1,13 @@
 node {
     checkout scm
     sh 'git submodule update --init' 
-    sh './build.sh'
-    sh 'make'
+    stage ('build') {
+        sh './build.sh'
+    }
+    stage ('docker image') {
+        sh 'make'
+    }
+    stage('system tests') {
+        sh 'echo Hello'
+    }
 }
