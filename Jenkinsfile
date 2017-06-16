@@ -1,5 +1,5 @@
 node {
     checkout scm
+    sh 'build.sh'
     sh 'make'
-    sh 'docker build -t maastest/mqtt-gateway:latest .'
 }
