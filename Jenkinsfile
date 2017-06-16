@@ -1,5 +1,5 @@
 node {
     checkout scm
-    sh 'build.sh'
+    sh './build.sh'
     sh 'make'
 }
