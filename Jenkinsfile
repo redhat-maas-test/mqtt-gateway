@@ -13,4 +13,5 @@ node {
             sh 'curl -s ${SCRIPTS}/run-tests.sh | bash /dev/stdin' 
         }
     }
+    deleteDir()
 }
