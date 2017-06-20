@@ -8,6 +8,7 @@ DOCKER_BUILD_OPTS?=""
 DOCKER?=docker
 
 all: 
+	env
 	mkdir -p build/
 	cp -r target/mqtt-gateway-1.0-SNAPSHOT-bin.tar.gz build/
 	echo "Running docker build $(REPO)"
