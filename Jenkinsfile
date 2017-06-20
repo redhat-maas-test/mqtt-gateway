@@ -11,7 +11,9 @@ node {
         withEnv(['SCRIPTS=https://raw.githubusercontent.com/EnMasseProject/travis-scripts/master']) {
             sh 'rm -rf systemtests'
             sh 'git clone https://github.com/EnMasseProject/systemtests.git'
-            sh 'curl -s ${SCRIPTS}/run-tests.sh | bash /dev/stdin' 
+            sh 'rm -rf enmasse'
+            sh 'git clone https://github.com/redhat-maas-test/enmasse.git'
+            sh 'curl -s ${SCRIPTS}/run-tests.sh | bash /dev/stdin enmasse/install'
         }
     }
     deleteDir()
