@@ -9,10 +9,8 @@ node {
     }
     stage('system tests') {
         withEnv(['SCRIPTS=https://raw.githubusercontent.com/EnMasseProject/travis-scripts/master']) {
-            sh 'rm -rf systemtests'
-            sh 'git clone https://github.com/EnMasseProject/systemtests.git'
-            sh 'rm -rf enmasse'
-            sh 'git clone https://github.com/redhat-maas-test/enmasse.git'
+            checkout scm: [$class: 'GitSCM', branches: [[name: '*/master']], userRemoteConfigs: [[url: 'https://github.com/EnMasseProject/systemtests.git']]]
+            checkout scm: [$class: 'GitSCM', branches: [[name: '*/master']], userRemoteConfigs: [[url: 'https://github.com/EnMasseProject/enmasse.git']]]
             sh 'curl -s ${SCRIPTS}/run-tests.sh | bash /dev/stdin enmasse/install'
         }
     }
