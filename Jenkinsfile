@@ -2,6 +2,7 @@ node {
     checkout scm
     sh 'git submodule update --init' 
     stage ('build') {
+        sh 'make clean'
         sh './build.sh'
     }
     stage ('docker image') {

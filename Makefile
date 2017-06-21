@@ -24,4 +24,4 @@ snapshot:
 	$(DOCKER) push $(DOCKER_REGISTRY)/$(REPO):$(IMAGE_VERSION)
 
 clean:
-	rm -rf build
+	rm -rf build target
