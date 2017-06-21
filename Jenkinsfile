@@ -17,8 +17,8 @@ node {
     stage('system tests') {
         withCredentials([usernamePassword(credentialsId: '8957fba6-7473-40f6-8593-efefa9e42251', passwordVariable: 'OPENSHIFT_PASSWD', usernameVariable: 'OPENSHIFT_USER')]) {
             withEnv(['SCRIPTS=https://raw.githubusercontent.com/EnMasseProject/travis-scripts/master']) {
-                checkout scm: [$class: 'GitSCM', branches: [[name: '*/master']], userRemoteConfigs: [[url: 'https://github.com/EnMasseProject/systemtests.git']]]
-                checkout scm: [$class: 'GitSCM', branches: [[name: '*/master']], userRemoteConfigs: [[url: 'https://github.com/EnMasseProject/enmasse.git']]]
+                sh 'rm -rf systemtests && git clone https://github.com/EnMasseProject/systemtests.git'
+                sh 'rm -rf enmasse && git clone https://github.com/EnMasseProject/enmasse.git'
                 sh 'export OPENSHIFT_PROJECT=`echo $JOB_NAME | tr / -`; curl -s ${SCRIPTS}/run-tests.sh | bash /dev/stdin ""'
             }
         }
