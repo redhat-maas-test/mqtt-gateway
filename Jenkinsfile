@@ -1,9 +1,8 @@
 node {
-    deleteDir()
     checkout scm
     sh 'git submodule update --init' 
     stage ('build') {
-        sh 'make clean'
+        sh 'sudo make clean'
         sh './build.sh'
     }
     stage ('docker image') {
