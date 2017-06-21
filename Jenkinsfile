@@ -1,8 +1,8 @@
 node {
+    sh 'sudo make clean'
     checkout scm
     sh 'git submodule update --init' 
     stage ('build') {
-        sh 'sudo make clean'
         sh './build.sh'
     }
     stage ('docker image') {
