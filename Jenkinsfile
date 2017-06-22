@@ -5,7 +5,7 @@ node {
         sh './build.sh'
     }
     stage ('docker image') {
-        sh 'make build'
+        sh 'make TMPDIR=`mktemp -d` build'
     }
     stage ('docker image push') {
         withCredentials([usernamePassword(credentialsId: 'a9bc53ba-716c-45de-9d74-dd5d003f83c3', passwordVariable: 'DOCKER_PASSWD', usernameVariable: 'DOCKER_USER')]) {
@@ -18,12 +18,11 @@ node {
             withEnv(['SCRIPTS=https://raw.githubusercontent.com/EnMasseProject/travis-scripts/master']) {
                 sh 'rm -rf systemtests && git clone https://github.com/EnMasseProject/systemtests.git'
                 sh 'rm -rf enmasse && git clone https://github.com/EnMasseProject/enmasse.git'
-//                sh 'export OPENSHIFT_PROJECT=`echo $JOB_NAME | tr / -`; curl -s ${SCRIPTS}/run-tests.sh | bash /dev/stdin "" enmasse/install'
+//                sh 'export OPENSHIFT_PROJECT=$BUILD_TAG; curl -s ${SCRIPTS}/run-tests.sh | bash /dev/stdin "" enmasse/install'
             }
         }
     }
     stage('docker snapshot') {
         sh 'make snapshot'
     }
-    deleteDir()
 }
