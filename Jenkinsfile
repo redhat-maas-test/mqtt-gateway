@@ -5,7 +5,7 @@ node {
         sh './build.sh'
     }
     stage ('docker image') {
-        sh 'make TMPDIR=`mktemp -d` build'
+        sh 'make build'
     }
     stage ('docker image push') {
         withCredentials([usernamePassword(credentialsId: 'a9bc53ba-716c-45de-9d74-dd5d003f83c3', passwordVariable: 'DOCKER_PASSWD', usernameVariable: 'DOCKER_USER')]) {
