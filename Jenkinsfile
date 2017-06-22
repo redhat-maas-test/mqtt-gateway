@@ -1,6 +1,6 @@
 node {
     checkout scm
-    sh 'git submodule update --init' 
+    sh 'rm -rf scripts && git clone https://github.com/redhat-maas-test/scripts.git'
     stage ('build') {
         sh './build.sh'
     }
