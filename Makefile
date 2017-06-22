@@ -3,7 +3,7 @@ COMMIT?=$(shell git rev-parse HEAD | cut -c1-8)
 IMAGE_VERSION?=latest
 DOCKERFILE_DIR?=build
 REPO?=$(shell cat $(IMAGE_FILE) | grep "^name:" | cut -d' ' -f2)
-DOCKER_BUILD_OPTS?=""
+DOCKER_BUILD_OPTS?=
 DOCKER?=docker
 
 build:
@@ -24,3 +24,5 @@ snapshot:
 
 clean:
 	rm -rf build target
+
+.PHONY: build push snapshot clean
